@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  prefect:
+    image: prefecthq/prefect:2-latest
+    container_name: prefect-server
+    environment:
+      - PREFECT_API_URL=http://127.0.0.1:4200/api
+    ports:
+      - "4200:4200"
+    entrypoint: >
+      bash -c "prefect server start"
+
