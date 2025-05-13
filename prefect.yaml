@@ -1,0 +1,9 @@
+prefect-version: 2.16.4
+
+deployments:
+- name: hello-deploy
+  entrypoint: flows/flow_versao1.py:flow_basico
+  work_pool:
+    name: default-agent-pool
+    work_queue_name: default
+    job_variables: {}
