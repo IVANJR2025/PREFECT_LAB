@@ -1,0 +1,29 @@
+name: Deploy Prefect Flow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -U pip
+        pip install prefect
+
+    - name: Prefect deploy flow
+      run: |
+        prefect cloud login --key ${{ secrets.PREFECT_API_KEY }}
+        prefect deploy --name hello-deploy --flow hello-world --work-pool hello-pool --apply
